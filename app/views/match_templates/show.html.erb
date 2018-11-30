@@ -70,7 +70,11 @@
       </dt>
       <!-- Display sender_slot_id start -->
       <dd>
-        <%= @match.sender_slot_id %>
+        <% if @match.sender_slot.present? %>
+          <a href="/slots/<%= @match.sender_slot_id %>">
+            <%= @match.sender_slot.user_id %>
+          </a>
+        <% end %>
       </dd>
       <!-- Display sender_slot_id end -->
 
@@ -79,7 +83,11 @@
       </dt>
       <!-- Display recipient_slot_id start -->
       <dd>
-        <%= @match.recipient_slot_id %>
+        <% if @match.recipient_slot.present? %>
+          <a href="/slots/<%= @match.recipient_slot_id %>">
+            <%= @match.recipient_slot.user_id %>
+          </a>
+        <% end %>
       </dd>
       <!-- Display recipient_slot_id end -->
 

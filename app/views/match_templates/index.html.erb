@@ -98,13 +98,21 @@
 
         <!-- Display match.sender_slot_id start -->
         <td>
-          <%= match.sender_slot.user_id %>
+          <% if match.sender_slot.present? %>
+            <a href="/slots/<%= match.sender_slot.id %>">
+              <%= match.sender_slot.user_id %>
+            </a>
+          <% end %>
         </td>
         <!-- Display match.sender_slot_id end -->
 
         <!-- Display match.recipient_slot_id start -->
         <td>
-          <%= match.recipient_slot.user_id %>
+          <% if match.recipient_slot.present? %>
+            <a href="/slots/<%= match.recipient_slot.id %>">
+              <%= match.recipient_slot.user_id %>
+            </a>
+          <% end %>
         </td>
         <!-- Display match.recipient_slot_id end -->
 
