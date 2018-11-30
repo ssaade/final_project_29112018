@@ -76,7 +76,7 @@
     </label>
 
     <!-- Input for recipient_slot_id start -->
-    <input type="text" id="recipient_slot_id" name="recipient_slot_id" class="form-control">
+    <%= select_tag(:recipient_slot_id, options_from_collection_for_select(Slot.all, :id, :user_id, @match.recipient_slot_id), :class => "form-control") %>
     <!-- Input for recipient_slot_id end -->
   </div>
   <!-- Label and input for recipient_slot_id end -->
