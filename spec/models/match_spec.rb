@@ -4,6 +4,8 @@ RSpec.describe Match, type: :model do
   
     describe "Direct Associations" do
 
+    it { should belong_to(:recipient_slot) }
+
     it { should belong_to(:sender_slot) }
 
     end
