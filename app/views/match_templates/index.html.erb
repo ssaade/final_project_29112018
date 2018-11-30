@@ -1,0 +1,132 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      All matches
+    </h1>
+
+    <a href="/matches/new" class="btn btn-block btn-outline-secondary">
+      Add a new match
+    </a>
+  </div>
+</div>
+
+<!-- Ransack Code start -->
+
+<!-- Ransack Code end -->
+
+<!-- Location Map Code start -->
+
+<!-- Location Map Code end -->
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Date
+        </th>
+
+        <th>
+          Start time
+        </th>
+
+        <th>
+          End time
+        </th>
+
+        <th>
+          State
+        </th>
+
+        <th>
+          Sender slot
+        </th>
+
+        <th>
+          Recipient slot
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @matches.each do |match| %>
+      <tr>
+        <!-- Display match.id start -->
+        <td>
+          <%= match.id %>
+        </td>
+        <!-- Display match.id end -->
+
+        <!-- Display match.date start -->
+        <td>
+          <%= match.date %>
+        </td>
+        <!-- Display match.date end -->
+
+        <!-- Display match.start_time start -->
+        <td>
+          <%= match.start_time %>
+        </td>
+        <!-- Display match.start_time end -->
+
+        <!-- Display match.end_time start -->
+        <td>
+          <%= match.end_time %>
+        </td>
+        <!-- Display match.end_time end -->
+
+        <!-- Display match.state_id start -->
+        <td>
+          <%= match.state_id %>
+        </td>
+        <!-- Display match.state_id end -->
+
+        <!-- Display match.sender_slot_id start -->
+        <td>
+          <%= match.sender_slot_id %>
+        </td>
+        <!-- Display match.sender_slot_id end -->
+
+        <!-- Display match.recipient_slot_id start -->
+        <td>
+          <%= match.recipient_slot_id %>
+        </td>
+        <!-- Display match.recipient_slot_id end -->
+
+        <!-- Display match.created_at start -->
+        <td>
+          <%= time_ago_in_words(match.created_at) %> ago
+        </td>
+        <!-- Display match.created_at end -->
+
+        <!-- Display match.updated_at start -->
+        <td>
+          <%= time_ago_in_words(match.updated_at) %> ago
+        </td>
+        <!-- Display match.updated_at end -->
+
+        <td>
+          <a href="/matches/<%= match.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
