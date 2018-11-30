@@ -11,64 +11,51 @@
         </a>
       </div>
 
-      <!-- Edit link match start -->
       <div class="col">
         <a href="/matches/<%= @match.id %>/edit" class="btn btn-block btn-outline-secondary">
           Edit match
         </a>
       </div>
-      <!-- Edit link match end -->
 
-      <!-- Delete link match start -->
       <div class="col">
         <a href="/delete_match/<%= @match.id %>" class="btn btn-block btn-outline-secondary">
           Delete match
         </a>
       </div>
-      <!-- Delete link match end -->
     </div>
 
     <dl>
       <dt>
         Date
       </dt>
-      <!-- Display date start -->
       <dd>
         <%= @match.date %>
       </dd>
-      <!-- Display date end -->
 
       <dt>
         Start time
       </dt>
-      <!-- Display start_time start -->
       <dd>
         <%= @match.start_time %>
       </dd>
-      <!-- Display start_time end -->
 
       <dt>
         End time
       </dt>
-      <!-- Display end_time start -->
       <dd>
         <%= @match.end_time %>
       </dd>
-      <!-- Display end_time end -->
 
       <dt>
         State
       </dt>
-      <!-- Display state_id start -->
       <dd>
         <%= @match.state_id %>
       </dd>
-      <!-- Display state_id end -->
 
       <dt>
         Sender slot
       </dt>
-      <!-- Display sender_slot_id start -->
       <dd>
         <% if @match.sender_slot.present? %>
           <a href="/slots/<%= @match.sender_slot_id %>">
@@ -76,12 +63,10 @@
           </a>
         <% end %>
       </dd>
-      <!-- Display sender_slot_id end -->
 
       <dt>
         Recipient slot
       </dt>
-      <!-- Display recipient_slot_id start -->
       <dd>
         <% if @match.recipient_slot.present? %>
           <a href="/slots/<%= @match.recipient_slot_id %>">
@@ -89,30 +74,24 @@
           </a>
         <% end %>
       </dd>
-      <!-- Display recipient_slot_id end -->
 
       <dt>
         Created at
       </dt>
-      <!-- Display created_at start -->
       <dd>
         <%= time_ago_in_words(@match.created_at) %> ago
       </dd>
-      <!-- Display created_at end -->
 
       <dt>
         Updated at
       </dt>
-      <!-- Display updated_at start -->
       <dd>
         <%= time_ago_in_words(@match.updated_at) %> ago
       </dd>
-      <!-- Display updated_at end -->
     </dl>
   </div>
 </div>
 
-<!-- Show Page Customization starts -->
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <%= render partial: "match_templates/match_comments" %>
@@ -130,4 +109,3 @@
     <%= render partial: "match_templates/match_sending_user" %>
   </div>
 </div>
-<!-- Show Page Customization end -->
