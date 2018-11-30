@@ -14,6 +14,10 @@ class Match < ApplicationRecord
 
   # Indirect associations
 
+  has_one    :sending_user,
+             :through => :sender_slot,
+             :source => :user
+
   has_one    :receiving_user,
              :through => :recipient_slot,
              :source => :user
