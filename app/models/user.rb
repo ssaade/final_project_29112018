@@ -10,6 +10,10 @@ class User < ApplicationRecord
 
   # Indirect associations
 
+  has_many   :received_matches,
+             :through => :slots,
+             :source => :received_matches
+
   # Validations
 
   # Include default devise modules. Others available are:
