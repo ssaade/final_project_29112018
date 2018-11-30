@@ -1,6 +1,7 @@
 class MatchesController < ApplicationController
   def index
-    @matches = Match.page(params[:page]).per(10)
+    @q = Match.ransack(params[:q])
+    @matches = @q.result(:distinct => true).includes(:sender_slot, :recipient_slot, :comments, :receiving_user, :sending_user).page(params[:page]).per(10)
 
     render("match_templates/index.html.erb")
   end
