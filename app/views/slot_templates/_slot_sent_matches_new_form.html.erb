@@ -1,0 +1,73 @@
+<!-- Form match start -->
+<form action="/create_match_from_slot" method="post">
+<!-- Form match end -->
+
+  <!-- Label and input for date start -->
+  <div class="form-group">
+    <label for="date">
+      Date
+    </label>
+
+    <!-- Input for date start -->
+    <input type="text" id="date" name="date" class="form-control" value="<%= @match.date %>">
+    <!-- Input for date end -->
+  </div>
+  <!-- Label and input for date end -->
+
+  <!-- Label and input for start_time start -->
+  <div class="form-group">
+    <label for="start_time">
+      Start time
+    </label>
+
+    <!-- Input for start_time start -->
+    <input type="text" id="start_time" name="start_time" class="form-control" value="<%= @match.start_time %>">
+    <!-- Input for start_time end -->
+  </div>
+  <!-- Label and input for start_time end -->
+
+  <!-- Label and input for end_time start -->
+  <div class="form-group">
+    <label for="end_time">
+      End time
+    </label>
+
+    <!-- Input for end_time start -->
+    <input type="text" id="end_time" name="end_time" class="form-control" value="<%= @match.end_time %>">
+    <!-- Input for end_time end -->
+  </div>
+  <!-- Label and input for end_time end -->
+
+  <!-- Label and input for state_id start -->
+  <div class="form-group">
+    <label for="state_id">
+      State
+    </label>
+
+    <!-- Input for state_id start -->
+    <input type="text" id="state_id" name="state_id" class="form-control" value="<%= @match.state_id %>">
+    <!-- Input for state_id end -->
+  </div>
+  <!-- Label and input for state_id end -->
+
+  <!-- Label and input for sender_slot_id start -->
+  <!-- Input for sender_slot_id start -->
+  <input type="hidden" name="sender_slot_id" value="<%= @slot.id %>">
+  <!-- Input for sender_slot_id end -->
+
+  <!-- Label and input for recipient_slot_id start -->
+  <div class="form-group">
+    <label for="recipient_slot_id">
+      Recipient slot
+    </label>
+
+    <!-- Input for recipient_slot_id start -->
+    <input type="text" id="recipient_slot_id" name="recipient_slot_id" class="form-control" value="<%= @match.recipient_slot_id %>">
+    <!-- Input for recipient_slot_id end -->
+  </div>
+  <!-- Label and input for recipient_slot_id end -->
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create match
+  </button>
+</form>
