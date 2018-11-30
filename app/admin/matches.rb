@@ -1,4 +1,6 @@
 ActiveAdmin.register Match do
+
+ permit_params :date, :start_time, :end_time, :state_id, :sender_slot_id, :recipient_slot_id
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
