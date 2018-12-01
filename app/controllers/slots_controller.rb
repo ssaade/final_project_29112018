@@ -39,6 +39,26 @@ class SlotsController < ApplicationController
 
     if @slot.valid?
       @slot.save
+      
+      slot_list = Slot.all
+      
+      slot_list.each do |candidate_slot|
+        
+        potential_start = [candidate_slot.start_time, @slot.start_time].max
+        potential_end = [candidate_slot.end_time, @slot.end_time].min
+        
+        if candidate_slot.user_id != current_user.id && candidate_slot.date == @slot.date && (potential_end - potential_start) > 7200
+          @match = Match.new
+          
+          @match.sender_slot_id = @slot.id
+          @match.recipient_slot_id = candidate_slot.id
+          @match.date = @slot.date
+          @match.start_time = potential_start
+          @match.end_time = potential_end
+          
+          @match.save
+        end
+      end
 
       redirect_back(:fallback_location => "/slots", :notice => "Slot created successfully.")
     else
