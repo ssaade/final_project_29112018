@@ -26,7 +26,7 @@ class Slot < ApplicationRecord
   validate :date_cannot_be_in_the_past,
  
   def date_cannot_be_in_the_past
-    if date < Date.today
+    if date.present? && date < Date.today
       errors.add(:date, "Date can't be in the past")
     end
   end
@@ -34,7 +34,7 @@ class Slot < ApplicationRecord
   validate :date_cannot_be_too_far,
  
   def date_cannot_be_too_far
-    if date > Date.today + 90
+    if date.present? && date > Date.today + 90
       errors.add(:date, "Date can't be that far in the future")
     end
   end
@@ -42,7 +42,7 @@ class Slot < ApplicationRecord
   validate :two_hours_min,
  
   def two_hours_min
-    if ( end_time - start_time) < 7200
+    if end_time.present? && start_time.present? && ( end_time - start_time) < 7200
       errors.add(:end_time, "End time cannot be less than 2 hours after start time")
     end
   end

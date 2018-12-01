@@ -1,39 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      FinalProject29112018
-    </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-nav-links" aria-controls="collapsible-nav-links" aria-expanded="false" aria-label="Toggle navigation">
+  
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      Product management practice pair-up</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="collapsible-nav-links">
+    <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Resources
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a href="/comments" class="dropdown-item">
-              Comments
-            </a>
-            <a href="/states" class="dropdown-item">
-              States
-            </a>
-            <a href="/matches" class="dropdown-item">
-              Matches
-            </a>
-            <a href="/slots" class="dropdown-item">
-              Slots
-            </a>
-            <a href="/users" class="dropdown-item">
-              Users
-            </a>
-          </div>
+        <li class="nav-item active">
+          <a class="nav-link" href="/slots">My slots <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/matches">My matches</a>
         </li>
       </ul>
-      <ul class="navbar-nav">
+      <span class="navbar-text">
+              <ul class="navbar-nav">
         <% if current_user.blank? %>
           <li class="nav-item">
             <a href="/users/sign_in" class="nav-link">
@@ -60,4 +43,9 @@
           </li>
         <% end %>
       </ul>
+
+      </span>
+    </div>
+  </nav>
+
 </nav>
