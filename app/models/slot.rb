@@ -46,4 +46,6 @@ class Slot < ApplicationRecord
       errors.add(:end_time, "End time cannot be less than 2 hours after start time")
     end
   end
+  
+  
 end

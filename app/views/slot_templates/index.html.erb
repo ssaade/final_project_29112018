@@ -4,9 +4,6 @@
       All slots
     </h1>
 
-    <a href="/slots/new" class="btn btn-block btn-outline-secondary">
-      Add a new slot
-    </a>
   </div>
 </div>
 
@@ -18,18 +15,12 @@
 
 
 
-<hr>
-
 <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
       <tr>
         <th>
           ID
-        </th>
-
-        <th>
-          User
         </th>
 
         <th>
@@ -45,14 +36,6 @@
         </th>
 
         <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
         </th>
       </tr>
 
@@ -63,38 +46,17 @@
         </td>
 
         <td>
-          <% if slot.user.present? %>
-            <a href="/users/<%= slot.user.id %>">
-              <%= slot.user.email %>
-            </a>
-          <% end %>
-        </td>
-
-        <td>
           <%= slot.date %>
         </td>
 
         <td>
-          <%= slot.start_time %>
+          <%= slot.start_time.to_time %>
         </td>
 
         <td>
           <%= slot.end_time %>
         </td>
 
-        <td>
-          <%= time_ago_in_words(slot.created_at) %> ago
-        </td>
-
-        <td>
-          <%= time_ago_in_words(slot.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/slots/<%= slot.id %>">
-            Show details
-          </a>
-        </td>
       </tr>
       <% end %>
     </table>
@@ -107,3 +69,41 @@
 
   </div>
 </div>
+
+<h1>
+  Add a new slot
+</h1>
+
+
+<hr>
+
+<form action="/create_slot" method="post" class="form-inline">
+
+  <input type="hidden" name="user_id" value="<%= current_user.id %>">
+  
+  <label for="date">
+    Date
+  </label>
+  <input type="date" class="form-control mr-4 ml-4" id="date" name="date" class="form-control">
+  
+  <label for="start_time">
+    Start time
+  </label>
+  <input type="time"  class="form-control mr-4 ml-4" id="start_time" name="start_time" class="form-control">
+  
+  <label for="end_time">
+    End time
+  </label>
+  <input type="time" class="form-control mr-4 ml-4" id="end_time" name="end_time" class="form-control">
+  
+  <button class="btn btn-block btn-outline-secondary mt-4">
+    Create slot
+  </button>
+</form>
+
+<hr>
+
+<a href="/slots">
+  Go back
+</a>
+
