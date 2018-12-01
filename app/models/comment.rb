@@ -11,5 +11,8 @@ class Comment < ApplicationRecord
   # Indirect associations
 
   # Validations
+  validates :author_id, presence: true
+  validates :match_id, presence: true
+  validates :body, presence: true
 
 end
