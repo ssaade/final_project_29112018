@@ -44,19 +44,29 @@ class SlotsController < ApplicationController
       
       slot_list.each do |candidate_slot|
         
-        potential_start = [candidate_slot.start_time, @slot.start_time].max
-        potential_end = [candidate_slot.end_time, @slot.end_time].min
         
-        if candidate_slot.user_id != current_user.id && candidate_slot.date == @slot.date && (potential_end - potential_start) > 7200
-          @match = Match.new
+        if candidate_slot.user_id != current_user.id && candidate_slot.date == @slot.date
           
-          @match.sender_slot_id = @slot.id
-          @match.recipient_slot_id = candidate_slot.id
-          @match.date = @slot.date
-          @match.start_time = potential_start
-          @match.end_time = potential_end
+            @match = Match.new
+            
+            @match.sender_slot_id = @slot.id
+            @match.recipient_slot_id = candidate_slot.id
+            @match.date = @slot.date
+            
+            if @slot.start_time > candidate_slot.start_time
+              @match.start_time = @slot.start_time
+            else
+              @match.start_time = candidate_slot.start_time            
+            end
+            
+            if @slot.end_time < candidate_slot.end_time
+              @match.end_time = @slot.end_time
+            else
+              @match.end_time = candidate_slot.end_time            
+            end
+            
+            @match.save
           
-          @match.save
         end
       end
 
