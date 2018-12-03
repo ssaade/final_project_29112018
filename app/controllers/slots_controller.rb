@@ -1,4 +1,4 @@
-class SlotsController < ApplicationController
+  class SlotsController < ApplicationController
   before_action :current_user_must_be_slot_user, :only => [:edit_form, :update_row, :destroy_row]
 
   def current_user_must_be_slot_user
@@ -25,17 +25,16 @@ class SlotsController < ApplicationController
 
   def new_form
     @slot = Slot.new
-
+  
     render("slot_templates/new_form.html.erb")
   end
 
   def create_row
     @slot = Slot.new
-
     @slot.user_id = params.fetch("user_id")
     @slot.start_time = params.fetch("start_time")
     @slot.end_time = params.fetch("end_time")
-
+    
     if @slot.valid?
       @slot.save
       
