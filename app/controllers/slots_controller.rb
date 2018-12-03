@@ -37,6 +37,35 @@
     
     if @slot.valid?
       @slot.save
+      
+      slot_list = Slot.all
+      
+      slot_list.each do |candidate_slot|
+        
+        
+        if candidate_slot.user_id != current_user.id && candidate_slot.start_time.to_date == @slot.start_time.to_date
+          
+            @match = Match.new
+            
+            @match.sender_slot_id = @slot.id
+            @match.recipient_slot_id = candidate_slot.id
+            
+            if @slot.start_time > candidate_slot.start_time
+              @match.start_time = @slot.start_time
+            else
+              @match.start_time = candidate_slot.start_time            
+            end
+            
+            if @slot.end_time < candidate_slot.end_time
+              @match.end_time = @slot.end_time
+            else
+              @match.end_time = candidate_slot.end_time            
+            end
+            
+            @match.save
+          
+        end
+      end
 
       redirect_back(:fallback_location => "/slots", :notice => "Slot created successfully.")
     else
@@ -54,7 +83,6 @@
     @slot = Slot.find(params.fetch("id_to_modify"))
 
     
-    @slot.date = params.fetch("date")
     @slot.start_time = params.fetch("start_time")
     @slot.end_time = params.fetch("end_time")
 

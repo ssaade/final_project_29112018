@@ -1,12 +1,18 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment-with-locales.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<script src="http://momentjs.com/downloads/moment-timezone.js" ></script>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
       All slots
     </h1>
 
-    <a href="/slots/new" class="btn btn-block btn-outline-secondary">
-      Add a new slot
-    </a>
   </div>
 </div>
 
@@ -18,18 +24,12 @@
 
 
 
-<hr>
-
 <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
       <tr>
         <th>
           ID
-        </th>
-
-        <th>
-          User
         </th>
 
         <th>
@@ -45,14 +45,6 @@
         </th>
 
         <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
         </th>
       </tr>
 
@@ -63,38 +55,17 @@
         </td>
 
         <td>
-          <% if slot.user.present? %>
-            <a href="/users/<%= slot.user.id %>">
-              <%= slot.user.email %>
-            </a>
-          <% end %>
+          <%= slot.start_time.to_date %>
         </td>
 
         <td>
-          <%= slot.date %>
+          <%= slot.start_time.strftime("%H:%M:%S %Z") %>
         </td>
 
         <td>
-          <%= slot.start_time %>
+          <%= slot.end_time.strftime("%H:%M:%S %Z") %>
         </td>
 
-        <td>
-          <%= slot.end_time %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(slot.created_at) %> ago
-        </td>
-
-        <td>
-          <%= time_ago_in_words(slot.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/slots/<%= slot.id %>">
-            Show details
-          </a>
-        </td>
       </tr>
       <% end %>
     </table>
@@ -107,3 +78,76 @@
 
   </div>
 </div>
+
+<h1>
+  Add a new slot
+</h1>
+
+
+<hr>
+<div class="form-group col-md">
+    <label for="timezone">
+      Current Timezone: Need to update
+    </label>
+    
+    <p>(Update timezone in user profile)</p>
+    
+  </div>
+
+<form action="/create_slot" method="post">
+
+  <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+  <div class="form-group">
+
+<div class="container">
+    <div class='col-md-5'>
+        <div class="form-group">
+            Start Date/Time (DD/MM/YYYY)
+            <div class='input-group date' id='datetimepicker6'>
+                <input type='text' class="form-control" name = "start_time" data-date-format="DD/MM/YYYY hh:mm a Z" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-5'>
+        <div class="form-group">
+            End Date/Time (DD/MM/YYYY)
+            <div class='input-group date' id='datetimepicker7'>
+                <input type='text' class="form-control" name = "end_time" data-date-format="DD/MM/YYYY hh:mm a Z" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false, //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary mt-4">
+    Create slot
+  </button>
+</form>
+
+<hr>
+
+<a href="/slots">
+  Go back
+</a>
+
