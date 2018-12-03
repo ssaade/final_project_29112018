@@ -19,7 +19,6 @@ class Slot < ApplicationRecord
   # Validations
  
   validates :user_id, presence: true
-  validates :date, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
   

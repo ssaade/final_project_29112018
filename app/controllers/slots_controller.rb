@@ -33,7 +33,6 @@ class SlotsController < ApplicationController
     @slot = Slot.new
 
     @slot.user_id = params.fetch("user_id")
-    @slot.date = params.fetch("date")
     @slot.start_time = params.fetch("start_time")
     @slot.end_time = params.fetch("end_time")
 
@@ -45,13 +44,12 @@ class SlotsController < ApplicationController
       slot_list.each do |candidate_slot|
         
         
-        if candidate_slot.user_id != current_user.id && candidate_slot.date == @slot.date
+        if candidate_slot.user_id != current_user.id && candidate_slot.start_time.to_date == @slot.start_time.to_date
           
             @match = Match.new
             
             @match.sender_slot_id = @slot.id
             @match.recipient_slot_id = candidate_slot.id
-            @match.date = @slot.date
             
             if @slot.start_time > candidate_slot.start_time
               @match.start_time = @slot.start_time
@@ -86,7 +84,6 @@ class SlotsController < ApplicationController
     @slot = Slot.find(params.fetch("id_to_modify"))
 
     
-    @slot.date = params.fetch("date")
     @slot.start_time = params.fetch("start_time")
     @slot.end_time = params.fetch("end_time")
 

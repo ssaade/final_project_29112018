@@ -25,7 +25,6 @@ class Match < ApplicationRecord
   # Validations
   validates :sender_slot_id, presence: true
   validates :recipient_slot_id, presence: true
-  validates :date, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
   
