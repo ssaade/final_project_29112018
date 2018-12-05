@@ -130,8 +130,8 @@
 
             <%= f.label :preferred_timezone %>
 
-            <%= f.text_field :preferred_timezone, :class => preferred_timezone_class, :placeholder => "Enter preferred timezone" %>
-
+            <%= f.select :preferred_timezone, options_from_collection_for_select(ActiveSupport::TimeZone.all.sort_by(&:name), :name, :name), :class => preferred_timezone_class%>
+            
             <% if preferred_timezone_was_invalid %>
               <% resource.errors.full_messages_for(:preferred_timezone).each do |message| %>
                 <div class="invalid-feedback d-flex">
@@ -140,6 +140,8 @@
               <% end %>
             <% end %>
           </div>
+          <p><font color = "red" >Match your preferred timezone with the timezone on your computer!</font></p>
+          
           <%= f.button class: "btn btn-outline-primary btn-block" %>
 
           <hr>
