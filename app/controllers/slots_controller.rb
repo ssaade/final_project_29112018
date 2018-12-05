@@ -11,8 +11,8 @@
 
   def index
     @q = current_user.slots.ransack(params[:q])
-    @slots = @q.result(:distinct => true).includes(:user, :sent_matches, :received_matches).page(params[:page]).per(10)
-
+    @slots = @q.result(:distinct => true).includes(:user, :sent_matches, :received_matches).page(params[:page]).per(10).order(:start_time)
+ 
     render("slot_templates/index.html.erb")
   end
 
