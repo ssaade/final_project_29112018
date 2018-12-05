@@ -21,9 +21,6 @@
   <div class="col-md-12">
     <table class="table">
       <tr>
-        <th>
-          ID
-        </th>
 
         <th>
           Date
@@ -38,23 +35,7 @@
         </th>
 
         <th>
-          State
-        </th>
-
-        <th>
-          Sender slot
-        </th>
-
-        <th>
-          Recipient slot
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
+          Matched username
         </th>
 
         <th>
@@ -63,12 +44,9 @@
 
       <% @matches.each do |match| %>
       <tr>
-        <td>
-          <%= match.id %>
-        </td>
 
         <td>
-          <%= match.date %>
+          <%= match.start_time.to_date %>
         </td>
 
         <td>
@@ -80,31 +58,11 @@
         </td>
 
         <td>
-          <%= match.state_id %>
-        </td>
-
-        <td>
-          <% if match.sender_slot.present? %>
-            <a href="/slots/<%= match.sender_slot.id %>">
-              <%= match.sender_slot.user_id %>
-            </a>
+          <% if match.sender_slot.user_id == current_user.id %>
+            <%= match.recipient_slot.user.username %>
+          <%else%>
+            <%= match.sender_slot.user.username %>
           <% end %>
-        </td>
-
-        <td>
-          <% if match.recipient_slot.present? %>
-            <a href="/slots/<%= match.recipient_slot.id %>">
-              <%= match.recipient_slot.user_id %>
-            </a>
-          <% end %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(match.created_at) %> ago
-        </td>
-
-        <td>
-          <%= time_ago_in_words(match.updated_at) %> ago
         </td>
 
         <td>

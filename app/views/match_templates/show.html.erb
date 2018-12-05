@@ -11,17 +11,6 @@
         </a>
       </div>
 
-      <div class="col">
-        <a href="/matches/<%= @match.id %>/edit" class="btn btn-block btn-outline-secondary">
-          Edit match
-        </a>
-      </div>
-
-      <div class="col">
-        <a href="/delete_match/<%= @match.id %>" class="btn btn-block btn-outline-secondary">
-          Delete match
-        </a>
-      </div>
     </div>
 
     <dl>
@@ -46,48 +35,28 @@
         <%= @match.end_time %>
       </dd>
 
-      <dt>
-        State
-      </dt>
+      <!--<dt>-->
+      <!--  State-->
+      <!--</dt>-->
       <dd>
         <%= @match.state_id %>
       </dd>
 
       <dt>
-        Sender slot
+        Related slot
       </dt>
       <dd>
-        <% if @match.sender_slot.present? %>
+        <% if @match.sender_slot.user_id == current_user.id %>
           <a href="/slots/<%= @match.sender_slot_id %>">
-            <%= @match.sender_slot.user_id %>
+            View related slot
           </a>
-        <% end %>
-      </dd>
-
-      <dt>
-        Recipient slot
-      </dt>
-      <dd>
-        <% if @match.recipient_slot.present? %>
+          <%else%>
           <a href="/slots/<%= @match.recipient_slot_id %>">
-            <%= @match.recipient_slot.user_id %>
+            View related slot
           </a>
         <% end %>
       </dd>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@match.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@match.updated_at) %> ago
-      </dd>
     </dl>
   </div>
 </div>
@@ -98,14 +67,3 @@
   </div>
 </div>
 
-<div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
-    <%= render partial: "match_templates/match_receiving_user" %>
-  </div>
-</div>
-
-<div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
-    <%= render partial: "match_templates/match_sending_user" %>
-  </div>
-</div>

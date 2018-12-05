@@ -40,6 +40,17 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "console_ip_whitelist", github: "firstdraft/console_ip_whitelist"
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "console_ip_whitelist", github: "firstdraft/console_ip_whitelist"
+  gem "database_cleaner"
+  gem "draft_log", github: "firstdraft/draft_log"
+  gem "dotenv-rails"
+  gem "faker"
+  gem "grade_runner", github: "firstdraft/grade_runner"
+  gem "pry-rails"
+  gem "web_git", github: "firstdraft/web_git"
 end
 
 group :development do
