@@ -13,7 +13,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   
-
+  
 <h1>
   Edit slot #<%= @slot.id %>
 </h1>
@@ -39,7 +39,7 @@
         <div class="form-group">
           Start Date/Time (UTC)
            <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
-                <input type="text" value = "<%= @slot.start_time%>" name = "start_time" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
+                <input type="text" value = "<%= @slot.start_time.strftime("%d/%m/%Y %l:%M %p")%>" name = "start_time" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
                 <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                 </div>
@@ -50,7 +50,7 @@
         <div class="form-group">
           End Date/Time (UTC)
            <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
-                <input type="text" value="<%=@slot.end_time%>" name = "end_time" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
+                <input type="text" value="<%=@slot.end_time.strftime("%d/%m/%Y %l:%M %p")%>" name = "end_time" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
                 <div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                 </div>
@@ -74,11 +74,11 @@
     $(function () {
         $('#datetimepicker7').datetimepicker({
           useCurrent: false,
-          defaultDate: "11/23/2018",
+        
         });
         $('#datetimepicker8').datetimepicker({
             useCurrent: false,
-            defaultDate: '<%=@slot.end_time%>'
+        
         });
         $("#datetimepicker7").on("change.datetimepicker", function (e) {
             $('#datetimepicker8').datetimepicker('minDate', e.date);
