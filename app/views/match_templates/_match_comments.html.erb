@@ -2,14 +2,14 @@
   <div class="card-header d-flex align-items-center justify-content-between">
     <strong>Comments</strong>
 
-    <a data-toggle="collapse" href="#match_comments_new_form">
-      Add comment
+     <a data-toggle="collapse" href="#match_comments_new_form">Add comment            
     </a>
   </div>
 
   <ul class="list-group list-group-flush">
     <% @match.comments.each do |comment| %>
       <li class="list-group-item d-flex align-items-center justify-content-between">
+        
         <%if current_user != comment.author %>
             <a>
           <strong><%= comment.body %></strong> - by: <%= comment.author.username %>
@@ -18,28 +18,42 @@
            <a>
             <%= comment.body %> - by: <%= comment.author.username %>
            </a>
-          
         <% end %>
       
 
         <%if current_user == comment.author %>
-          <a href="/comments/<%= comment.id %>">
-            Edit
-          </a>
-          
-          <a href="/delete_comment_from_match/<%= comment.id %>">
-            Delete
-          </a>
-        <% end %>
+          <div class="btn-group d-flex" role="group">
+            <a href="/comments/<%= comment.id %>/edit" class="btn btn-warning w-100">
+              <i class="fas fa-edit"></i>
+                Edit
+            </a>
+            <a href="/delete_comment_from_match/<%= comment.id %>" class="btn btn-danger w-100" rel="nofollow">
+              <i class="fas fa-trash"></i>
+                Delete
+            </a>
+          </div> <!-- btn-group btn-group-justified -->
+        <% else %>
+          <div class="btn-group d-flex " role="group" >
+            <a class="btn btn-light w-100 disabled">
+              <i class="fas fa-edit"></i>
+                Edit
+            </a>
+            <a class="btn btn-light w-100 disabled" rel="nofollow">
+              <i class="fas fa-trash"></i>
+                Delete
+            </a>
+          </div> <!-- btn-group btn-group-justified -->
+        <% end %>        
+        
 
       </li>
     <% end %>
-
-    <div class="card-footer">
-      <div class="collapse" id="match_comments_new_form">
-        <%= render partial: "match_templates/match_comments_new_form" %>
-      </div>
+    <div class="card-footer">            
+       <div class="collapse" id="match_comments_new_form">            
+      <%= render partial: "match_templates/match_comments_new_form" %>            
+      </div>            
     </div>
+
 
   </ul>
 </div>
