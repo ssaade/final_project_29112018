@@ -34,9 +34,13 @@ class CommentsController < ApplicationController
     @comment.match_id = params.fetch("match_id")
     @comment.author_id = params.fetch("author_id")
     @comment.body = params.fetch("body")
+    
+    @user = current_user
 
     if @comment.valid?
       @comment.save
+      
+      ExampleMailer.sample_email(@user).deliver
 
       redirect_back(:fallback_location => "/comments", :notice => "Comment created successfully.")
     else
