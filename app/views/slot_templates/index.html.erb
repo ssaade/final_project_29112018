@@ -17,7 +17,7 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      All slots
+      <%= current_user.username + "- All Slots" %>
     </h1>
 
   </div>
@@ -31,18 +31,15 @@
  <% zone_abbr = Time.now.in_time_zone(current_user.preferred_timezone).zone %>
  <% offset = Time.zone_offset(zone_abbr)/3600 %>
 
-<h5> User's Preferred Timezone: <%= current_user.preferred_timezone %> (<%= zone_abbr %>)</h5>
+<h5> User's Preferred Timezone: <font color="red"><%= current_user.preferred_timezone %> (<%= zone_abbr %>)</font></h5>
 
 <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
       <tr>
-        <th>
-          ID
-        </th>
 
         <th>
-          Date (YYYY/MM/DD)
+          Date (MM/DD/YYYY)
         </th>
 
         <th>
@@ -67,20 +64,23 @@
 
       <% @slots.each do |slot| %>
       <tr>
+
         <td>
-          <%= slot.id %>
+          <% if slot.start_time.to_date == slot.end_time.to_date %>
+            <% date = slot.start_time.to_date.strftime("%d/%m/%Y") %>
+          <% else %>
+            <% date = slot.start_time.to_date.strftime("%d/%m/%Y").to_s + " - " + slot.end_time.to_date.strftime("%d/%m/%Y").to_s %>
+          <% end %>
+          
+          <%= date %>
         </td>
 
         <td>
-          <%= slot.start_time.to_date %>
+          <%= slot.start_time.in_time_zone(current_user.preferred_timezone).strftime("%l:%M %p") %>
         </td>
 
         <td>
-          <%= slot.start_time.in_time_zone(current_user.preferred_timezone).strftime("%l:%M %P %Z") %>
-        </td>
-
-        <td>
-          <%= slot.end_time.in_time_zone(current_user.preferred_timezone).strftime("%l:%M %P %Z") %>
+          <%= slot.end_time.in_time_zone(current_user.preferred_timezone).strftime("%l:%M %p") %>
         </td>
         
         <td>
