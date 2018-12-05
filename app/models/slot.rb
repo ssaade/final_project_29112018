@@ -42,7 +42,7 @@ class Slot < ApplicationRecord
  
   def two_hours_min
     if end_time.present? && start_time.present? && ( end_time - start_time) < 7200
-      errors.add(:end_time, "End time cannot be less than 2 hours after start time")
+      errors.add(:end_time, " cannot be less than 2 hours after start time")
     end
   end
   
