@@ -62,15 +62,8 @@
         </th>
       </tr>
 
-      <% i = 1 %>
       <% @slots.each do |slot| %>
       <tr>
-
-        <td>
-          <%= i %>
-          <% i = i + 1 %>
-        </td>
-
 
         <td>
           <% if slot.start_time.to_date == slot.end_time.to_date %>
