@@ -65,10 +65,12 @@
         </th>
       </tr>
 
+      <% i = 1 %>
       <% @slots.each do |slot| %>
       <tr>
         <td>
-          <%= slot.id %>
+          <%= i %>
+          <% i = i + 1 %>
         </td>
 
         <td>
