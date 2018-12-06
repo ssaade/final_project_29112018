@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h1>
-      Match  details
+      Match  details with <%= @match.recipient_slot.user.username %>
     </h1>
 
     <div class="row mb-3">
@@ -15,24 +15,30 @@
 
     <dl>
       <dt>
-        Date
+        Date (MM/DD/YYYY)
       </dt>
       <dd>
-        <%= @match.date %>
+        <% if @match.start_time.to_date == @match.end_time.to_date %>
+            <% date = @match.start_time.to_date.strftime("%d/%m/%Y") %>
+          <% else %>
+            <% date = @match.start_time.to_date.strftime("%d/%m/%Y").to_s + " - " + @match.end_time.to_date.strftime("%d/%m/%Y").to_s %>
+          <% end %>
+          
+          <%= date %>
       </dd>
 
       <dt>
         Start time
       </dt>
       <dd>
-        <%= @match.start_time %>
+        <%= @match.start_time.in_time_zone(current_user.preferred_timezone).strftime("%l:%M %p") + " " + Time.now.in_time_zone(current_user.preferred_timezone).zone %>
       </dd>
 
       <dt>
         End time
       </dt>
       <dd>
-        <%= @match.end_time %>
+        <%= @match.end_time.in_time_zone(current_user.preferred_timezone).strftime("%l:%M %p") + " " + Time.now.in_time_zone(current_user.preferred_timezone).zone %>
       </dd>
 
       <!--<dt>-->
