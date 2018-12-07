@@ -9,6 +9,10 @@
     end
   end
 
+  def home
+    render("slot_templates/home.html.erb")
+  end
+
   def index
     @q = current_user.slots.ransack(params[:q])
     @slots = @q.result(:distinct => true).includes(:user, :sent_matches, :received_matches).page(params[:page]).per(10).order(:start_time)
