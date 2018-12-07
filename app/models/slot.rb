@@ -25,16 +25,16 @@ class Slot < ApplicationRecord
   validate :date_cannot_be_in_the_past,
  
   def date_cannot_be_in_the_past
-    if date.present? && date < Date.today
-      errors.add(:date, "Date can't be in the past")
+    if start_time.present? && start_time < Time.now
+      errors.add(:start_time, "cannot be in the past")
     end
   end
   
   validate :date_cannot_be_too_far,
  
   def date_cannot_be_too_far
-    if date.present? && date > Date.today + 90
-      errors.add(:date, "Date can't be that far in the future")
+    if start_time.present? && start_time > Time.now + 90*24*60*60
+      errors.add(:start_time, "cannot be more than 3 months into the future")
     end
   end
   
