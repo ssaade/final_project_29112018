@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root :to => "slots#index"
   # Routes for the Comment resource:
 
   # CREATE
@@ -66,7 +65,10 @@ Rails.application.routes.draw do
   #------------------------------
 
   # Routes for the Slot resource:
-
+  
+  # Home page
+  get("/", { :controller => "slots", :action => "home" })
+  
   # CREATE
   get("/slots/new", { :controller => "slots", :action => "new_form" })
   post("/create_slot", { :controller => "slots", :action => "create_row" })
