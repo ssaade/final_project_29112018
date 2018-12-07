@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      All my matches
+      <%= current_user.username + "- All Matches" %>
     </h1>
 
   </div>
@@ -13,9 +13,9 @@
   </div>
 </div>
 
-
-
 <hr>
+<% zone_abbr = Time.now.in_time_zone(current_user.preferred_timezone).zone %>
+<h5> User's Preferred Timezone: <font color="red"><%= current_user.preferred_timezone %> (<%= zone_abbr %>)</font></h5>
 
 <div class="row mb-3">
   <div class="col-md-12">
@@ -23,7 +23,7 @@
       <tr>
 
         <th>
-          Date
+          Date (MM/DD/YYYY)
         </th>
 
         <th>
@@ -46,15 +46,21 @@
       <tr>
 
         <td>
-          <%= match.start_time.to_date %>
+          <% if match.start_time.to_date == match.end_time.to_date %>
+            <% date = match.start_time.to_date.strftime("%d/%m/%Y") %>
+          <% else %>
+            <% date = match.start_time.to_date.strftime("%d/%m/%Y").to_s + " - " + match.end_time.to_date.strftime("%d/%m/%Y").to_s %>
+          <% end %>
+          
+          <%= date %>
         </td>
 
         <td>
-          <%= match.start_time.strftime("%H:%M:%S %Z") %>
+          <%= match.start_time.in_time_zone(current_user.preferred_timezone).strftime("%l:%M %p") %>
         </td>
 
         <td>
-          <%= match.end_time.strftime("%H:%M:%S %Z") %>
+          <%= match.end_time.in_time_zone(current_user.preferred_timezone).strftime("%l:%M %p") %>
         </td>
 
         <td>
@@ -66,9 +72,12 @@
         </td>
 
         <td>
+          
+          <button type="button" class="btn btn-primary">
           <a href="/matches/<%= match.id %>">
-            Show details
+             <font color="white">Show details</font>
           </a>
+          </button>
         </td>
       </tr>
       <% end %>

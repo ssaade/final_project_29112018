@@ -6,13 +6,12 @@
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/esm/popper.min.js"></script>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
   
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 <% if @slot.present? %>
   <% if @slot.errors.any? %>
@@ -28,87 +27,77 @@
   Add a new slot
 </h1>
 
-
 <hr>
  <% zone_abbr = Time.now.in_time_zone(current_user.preferred_timezone).zone %>
- 
  <% offset = Time.zone_offset(zone_abbr)/3600 %>
-
-<div class="form-group col-md">
-    
-  </div>
 
 <form action="/create_slot" method="post">
 
   <input type="hidden" name="user_id" value="<%= current_user.id %>">
 
   <div class="form-group">
-
-<div class="container">
-  <div class = "row" >
-    <div class='col-md-4'>
-        <div class="form-group">
-          Start Date/Time (UTC)
-           <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
-                <input type="text" value = "<%= @slot.start_time.strftime("%d/%m/%Y %l:%M %p")%>" name = "start_time" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
-                <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+    <div class="container">
+      <div class = "row" >
+        <div class='col-md-4'>
+            <div class="form-group">
+              Start Date/Time (UTC)
+               <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
+                    <input type="text" value = "<%= @slot.start_time.strftime("%d/%m/%Y %l:%M %p")%>" name = "start_time" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
+                    <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class='col-md-4'>
-        <div class="form-group">
-          End Date/Time (UTC)
-           <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
-                <input type="text" value="<%=@slot.end_time.strftime("%d/%m/%Y %l:%M %p")%>" name = "end_time" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
-                <div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+        <div class='col-md-4'>
+            <div class="form-group">
+              End Date/Time (UTC)
+               <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
+                    <input type="text" value="<%=@slot.end_time.strftime("%d/%m/%Y %l:%M %p")%>" name = "end_time" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
+                    <div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class = "col-md-4">
-      <div>
-        <br \>
+        <div class = "col-md-4">
+          <div>
+            <br \>
+          </div>
+          <% popover_content1 = zone_abbr.to_s + " current offset: " + offset.to_s + " hours" %>
+          <% popover_content2 = "Current Time:<br\>(UTC) - " + Time.now.strftime("%l:%M %P").to_s %>
+          <% popover_content2 = popover_content2 + "<br\>(" + zone_abbr + ") - " + Time.now.in_time_zone(current_user.preferred_timezone).strftime("%l:%M %P").to_s %>
+          <a tabindex="0" data-html="true" class="btn btn-lg btn-success" data-placement="top" role="button" data-toggle="popover" data-trigger="focus" title="<%=popover_content1%>" data-content="<%=popover_content2%>">
+              Get Timezone Conversion!
+          </a>
+        </div>
       </div>
-      <% popover_content1 = zone_abbr.to_s + " current offset: " + offset.to_s + " hours" %>
-      <% popover_content2 = "Current Time:<br\>(UTC) - " + Time.now.strftime("%l:%M %P").to_s %>
-      <% popover_content2 = popover_content2 + "<br\>(" + zone_abbr + ") - " + Time.now.in_time_zone(current_user.preferred_timezone).strftime("%l:%M %P").to_s %>
-      <a tabindex="0" data-html="true" class="btn btn-lg btn-success" data-placement="top" role="button" data-toggle="popover" data-trigger="focus" title="<%=popover_content1%>" data-content="<%=popover_content2%>">
-          Get Timezone Conversion!
-      </a>
     </div>
-  </div>
-</div>
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker7').datetimepicker({
-          useCurrent: false,
-          
-        
+    
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker7').datetimepicker({
+              useCurrent: false,
+            });
+            $('#datetimepicker8').datetimepicker({
+                useCurrent: false,
+            });
+            $("#datetimepicker7").on("change.datetimepicker", function (e) {
+                $('#datetimepicker8').datetimepicker('minDate', e.date);
+            });
+            $("#datetimepicker8").on("change.datetimepicker", function (e) {
+                $('#datetimepicker7').datetimepicker('maxDate', e.date);
+            });
         });
-        $('#datetimepicker8').datetimepicker({
-            useCurrent: false,
-        
-        });
-        $("#datetimepicker7").on("change.datetimepicker", function (e) {
-            $('#datetimepicker8').datetimepicker('minDate', e.date);
-        });
-        $("#datetimepicker8").on("change.datetimepicker", function (e) {
-            $('#datetimepicker7').datetimepicker('maxDate', e.date);
-        });
+    </script>
+    
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover(); 
     });
-</script>
-
-<script>
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover(); 
-});
-</script>
+    </script>
 
   </div>
-  
     <p style="font-size:90%;">
       <em>
         Matches are made based on UTC timezone, so please input your time slots using UTC. Click the green button above for your conversion! 
