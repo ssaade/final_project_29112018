@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   # READ
   get("/matches", { :controller => "matches", :action => "index" })
   get("/matches/:id_to_display", { :controller => "matches", :action => "show" })
+  get("/matches_subset/:slot_id_to_display", { :controller => "matches", :action => "show_subset" })
 
   # UPDATE
   get("/matches/:prefill_with_id/edit", { :controller => "matches", :action => "edit_form" })
