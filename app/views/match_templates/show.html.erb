@@ -19,9 +19,9 @@
       </dt>
       <dd>
         <% if @match.start_time.to_date == @match.end_time.to_date %>
-            <% date = @match.start_time.to_date.strftime("%d/%m/%Y") %>
+            <% date = @match.start_time.to_date.strftime("%m/%d/%Y") %>
           <% else %>
-            <% date = @match.start_time.to_date.strftime("%d/%m/%Y").to_s + " - " + @match.end_time.to_date.strftime("%d/%m/%Y").to_s %>
+            <% date = @match.start_time.to_date.strftime("%m/%d/%Y").to_s + " - " + @match.end_time.to_date.strftime("%d/%m/%Y").to_s %>
           <% end %>
           
           <%= date %>

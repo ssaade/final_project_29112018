@@ -86,15 +86,15 @@
   def update_row
     @slot = Slot.find(params.fetch("id_to_modify"))
     
-    @slot.start_time = params.fetch("start_time")
-    @slot.end_time = params.fetch("end_time")
+    @slot.start_time = DateTime.strptime(params.fetch("start_time"), "%m/%d/%Y %l:%M %P")
+    @slot.end_time = DateTime.strptime(params.fetch("end_time"), "%m/%d/%Y %l:%M %P")
 
     if @slot.valid?
       @slot.save
       
     #Remove all matches that have this current slot
-    Match.where(sender_slot_id: current_user.id).delete_all
-    Match.where(recipient_slot_id: current_user.id).delete_all
+    Match.where(sender_slot_id: @slot.id).delete_all
+    Match.where(recipient_slot_id: @slot.id).delete_all
     
     slot_list = Slot.all
       
@@ -140,9 +140,14 @@
 
   def destroy_row
     @slot = Slot.find(params.fetch("id_to_remove"))
+    
+    #Also destroy all matches that have this current slot
+    Match.where(sender_slot_id: @slot.id).delete_all
+    Match.where(recipient_slot_id: @slot.id).delete_all
 
     @slot.destroy
 
     redirect_to("/slots", :notice => "Slot deleted successfully.")
   end
-end
+  
+  end

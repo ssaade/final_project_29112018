@@ -13,7 +13,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   
-  
+<script type="text/javascript" src="/path/to/jquery.js"></script>
+<script type="text/javascript" src="/path/to/moment.js"></script>
+<script type="text/javascript" src="/path/to/tempusdominus-bootstrap-4.min.js"></script>
+
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
@@ -67,9 +70,9 @@
 
         <td>
           <% if slot.start_time.to_date == slot.end_time.to_date %>
-            <% date = slot.start_time.to_date.strftime("%d/%m/%Y") %>
+            <% date = slot.start_time.to_date.strftime("%m/%d/%Y") %>
           <% else %>
-            <% date = slot.start_time.to_date.strftime("%d/%m/%Y").to_s + " - " + slot.end_time.to_date.strftime("%d/%m/%Y").to_s %>
+            <% date = slot.start_time.to_date.strftime("%m/%d/%Y").to_s + " - " + slot.end_time.to_date.strftime("%m/%d/%Y").to_s %>
           <% end %>
           
           <%= date %>
@@ -112,10 +115,7 @@
   Add New Time Slot
 </h1>
 
-
-
 <hr>
-
 
 <form action="/create_slot" method="post">
 
@@ -163,12 +163,11 @@
           $(function () {
               $('#datetimepicker7').datetimepicker({
                   format: 'MM/DD/YYYY',
+                  
               });
               $('#datetimepicker8').datetimepicker({
                   useCurrent: false,
                   format: 'MM/DD/YYYY',
-                  
-                  
               });
               $("#datetimepicker7").on("change.datetimepicker", function (e) {
                   $('#datetimepicker8').datetimepicker('minDate', e.date);
