@@ -97,6 +97,14 @@
             <a href = "/delete_slot/<%= slot.id %>" > <font color="white">Delete</font> </a>
           </button>
         </td>
+        
+        <td>
+          <% if Match.where(sender_slot_id: slot.id).count > 0 or Match.where(recipient_slot_id: slot.id).count > 0 %>
+          <button type="button" class="btn btn-success">
+            <a href = "/matches_subset/<%=slot.id%>" > <font color="white">View Matches</font> </a>
+          </button>
+          <% end %>
+        </td>
 
       </tr>
       <% end %>
