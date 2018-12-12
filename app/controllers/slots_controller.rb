@@ -71,7 +71,7 @@
         end
       end
 
-      redirect_back(:fallback_location => "/slots", :notice => "Slot created successfully.")
+      redirect_to "/slots", notice: "Slot created successfully!"
     else
       render("slot_templates/new_form_with_errors.html.erb")
     end
