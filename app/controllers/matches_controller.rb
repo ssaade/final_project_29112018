@@ -12,6 +12,15 @@ class MatchesController < ApplicationController
 
     render("match_templates/show.html.erb")
   end
+  
+  def show_subset
+    @q = Match.ransack(params[:q])
+    slot_id = params.fetch("slot_id_to_display")
+    @slot = Slot.find(slot_id)
+    @matches = Match.where(sender_slot_id: @slot.id).or(Match.where(recipient_slot_id: @slot.id)).page(params[:page]).per(10)
+    
+    render("match_templates/show_subset.html.erb")
+  end
 
   def new_form
     @match = Match.new

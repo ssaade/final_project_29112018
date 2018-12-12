@@ -40,7 +40,7 @@
             <div class="form-group">
               Start Date/Time (UTC)
                <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
-                    <input type="text" value = "<%= @slot.start_time.strftime("%d/%m/%Y %l:%M %p")%>" name = "start_time" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
+                    <input type="text" value = "<%= @slot.start_time.strftime("%m/%d/%Y %l:%M %p")%>" name = "start_time" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
                     <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -51,7 +51,7 @@
             <div class="form-group">
               End Date/Time (UTC)
                <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
-                    <input type="text" value="<%=@slot.end_time.strftime("%d/%m/%Y %l:%M %p")%>" name = "end_time" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
+                    <input type="text" value="<%=@slot.end_time.strftime("%m/%d/%Y %l:%M %p")%>" name = "end_time" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
                     <div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>

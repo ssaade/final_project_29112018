@@ -1,7 +1,9 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      <%= current_user.username + "- All Matches" %>
+      <%= current_user.username %>
+      <br \>
+      <%= "Matches for slot " + @slot.start_time.in_time_zone(current_user.preferred_timezone).strftime("%m/%d/%Y %l:%M %p") + " - " + @slot.end_time.in_time_zone(current_user.preferred_timezone).strftime("%m/%d/%Y %l:%M %p") %>
     </h1>
 
   </div>
